@@ -4,7 +4,7 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
   var self = this;
 
   self.userObject = {};
-  self.userObject.shelfItem = {list: []};
+  self.shelfList = {list:[]};
 
   // ask the server if this user is logged in
   self.getuser = function () {
@@ -31,8 +31,8 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
   self.getImages = function () {
     $http.get('/api/user/images')
       .then(function (response) {
-          self.userObject.shelfItem.list = response.data.shelfItem;
-          console.log('User Shelf Item: ', self.userObject.shelfItem.list);
+          self.shelfList.list = response.data;
+          console.log('User Shelf Item: ', self.shelfList.list);
       },
       // error response of unauthorized (403)
       function(response) {
@@ -42,7 +42,7 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
   }
 
 
-  // self.getImages();
+  self.getImages();
 
   self.shelfADdog = function (userId, newDdog) {
     console.log('ddog clickin');

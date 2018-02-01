@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
 router.get('/images', (req, res) => {
   console.log('images get');
   
-  Person.find({}, (error, shelfList) => {
+  Item.find({}, (error, shelfList) => {
       if(error) {
           console.log('error on find:', error);
           res.sendStatus(500);
