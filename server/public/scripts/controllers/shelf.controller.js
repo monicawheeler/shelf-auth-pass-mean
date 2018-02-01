@@ -12,4 +12,6 @@ myApp.controller('ShelfController', ['UserService', function(UserService) {
   }
 
 
+  //self.userService.getImages();
+
 }]);

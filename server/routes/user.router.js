@@ -18,6 +18,22 @@ router.get('/', (req, res) => {
   }
 });
 
+
+// Handles Ajax request for user information if user is authenticated
+router.get('/images', (req, res) => {
+  console.log('images get');
+  
+  Person.find({}, (error, shelfList) => {
+      if(error) {
+          console.log('error on find:', error);
+          res.sendStatus(500);
+      } else {
+          console.log('found shelf documents', shelfList);
+          res.send(shelfList);
+      }
+  })
+});
+
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
@@ -53,31 +69,39 @@ router.post('/ddogger/:id', (req, res) => {
   console.log('params', req.params);
 
   if(req.isAuthenticated()) {
-  let newDdog = new Item(req.body);
-  Person.findByIdAndUpdate(
-      {
-          "_id": req.params.id
-      },
-      // push this new object into the array on this Game Document
-      { $push: { shelfItem: newDdog } },
-      (pusherror, doc) => {
-          if (pusherror) {
-              console.log('error on push to shelf array: ', pusherror);
-              res.sendStatus(500);
-          } else {
-              console.log('updated person Document: ', doc);
-              console.log('-----------------------------');
+    let newDdog = new Item(req.body);
+    newDdog.save((error, itemDoc) => {
+      if(error) {
+        res.sendStatus(500);
+      } else {
+        console.log('saved new itemDoc', itemDoc);
+        
+        Person.findByIdAndUpdate(
+          {
+              "_id": req.params.id
+          },
+          // push this new object into the array on this Game Document
+          { $push: { shelfItem: newDdog } },
+          (pusherror, doc) => {
+              if (pusherror) {
+                  console.log('error on push to shelf array: ', pusherror);
+                  res.sendStatus(500);
+              } else {
+                  console.log('updated person Document: ', doc);
+                  console.log('-----------------------------');
 
-              res.sendStatus(201);
+                  res.sendStatus(201);
+              }
           }
+        );
       }
-  );
+    })
 
-}// end of authentication
+  }// end of authentication
 
-else {
-  res.sendStatus(403);
-}
+  else {
+    res.sendStatus(403);
+  }
 
 });// end of ddogger post
 
