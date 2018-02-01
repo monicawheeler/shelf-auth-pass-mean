@@ -1,7 +1,7 @@
 myApp.controller('ShelfController', ['UserService', function(UserService) {
   console.log('ShelfController created');
   var self = this;
-  self.UserService = UserService;
+  self.userService = UserService;
   self.user = UserService.userObject;
   console.log(self.user);
   
