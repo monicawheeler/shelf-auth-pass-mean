@@ -15,13 +15,13 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
           console.log('User Data: ', self.userObject.userName);
         } else {
           // unlikely to get here, but if we do, bounce them back to the login page
-          $location.path("/home");
+          $location.path("/shelf");
         }
       },
       // error response of unauthorized (403)
       function(response) {
         // user has no session, bounce them back to the login page
-        $location.path("/home");
+        $location.path("/shelf");
       });
   }
 
@@ -29,11 +29,11 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
     $http.get('/api/user/logout')
       .then(function (response) {
         console.log('logged out');
-        $location.path("/home");
+        $location.path("/shelf");
       },
     function(response) {
       console.log('logged out error');
-      $location.path("/home");
+      $location.path("/shelf");
     });
   }
 }]);
