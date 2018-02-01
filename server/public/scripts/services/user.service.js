@@ -26,9 +26,9 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
         $location.path("/shelf");
       });
   } 
-  self.shelfADdog = function (newDdog) {
+  self.shelfADdog = function (userId, newDdog) {
     console.log('ddog clickin');
-    $http.post(`/api/user/ddogger/${self.userObject._id}`, newDdog) 
+    $http.post(`/api/user/ddogger/${userId}`, newDdog) 
     .then(function (response) {
         console.log('successful post response' , response);
     })
