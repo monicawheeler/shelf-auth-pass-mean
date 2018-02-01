@@ -1,7 +1,7 @@
 myApp.controller('ShelfController', ['UserService', function(UserService) {
   console.log('ShelfController created');
   var self = this;
-  self.UserService = UserService;
+  self.userService = UserService;
   self.user = UserService.userObject;
   console.log(self.user);
   
@@ -10,5 +10,6 @@ myApp.controller('ShelfController', ['UserService', function(UserService) {
     console.log('ddogin aint easily clicked', userId);
     UserService.shelfADdog(userId, newDdog);
   }
+
 
 }]);
