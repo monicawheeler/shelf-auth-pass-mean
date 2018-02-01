@@ -23,6 +23,8 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
         }
       }
     })
+    
+
     .when('/info', {
       templateUrl: '/views/templates/info.html',
       controller: 'InfoController as vm',
