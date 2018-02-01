@@ -6,7 +6,7 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
     .when('/', {
       redirectTo: 'home'
     })
-    .when('/home', {
+    .when('/home', { 
       templateUrl: '/views/templates/home.html',
       controller: 'LoginController as vm',
     })
@@ -23,8 +23,6 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
         }
       }
     })
-    
-
     .when('/info', {
       templateUrl: '/views/templates/info.html',
       controller: 'InfoController as vm',
