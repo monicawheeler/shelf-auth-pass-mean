@@ -1,6 +1,7 @@
 const express = require('express');
 const encryptLib = require('../modules/encryption');
-const Model = require('../models/Person');
+const Person = require('../models/Person').Person;
+const Item = require('../models/Person').Item;
 const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
@@ -24,7 +25,7 @@ router.post('/register', (req, res, next) => {
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
 
-  const newPerson = new Model.Person({ username, password });
+  const newPerson = new Person({ username, password });
   newPerson.save()
     .then(() => { res.sendStatus(201); })
     .catch((err) => { next(err); });
@@ -47,12 +48,13 @@ router.get('/logout', (req, res) => {
 
 // Add a new ddogger
 router.post('/ddogger/:id', (req, res) => {
+
   console.log('in ddoggers route', req.body);
   console.log('params', req.params);
 
-  let newDdog = new Model.Item(req.body);
-
-  Model.Person.findByIdAndUpdate(
+  if(req.isAuthenticated()) {
+  let newDdog = new Item(req.body);
+  Person.findByIdAndUpdate(
       {
           "_id": req.params.id
       },
@@ -70,6 +72,13 @@ router.post('/ddogger/:id', (req, res) => {
           }
       }
   );
-});
+
+}// end of authentication
+
+else {
+  res.sendStatus(403);
+}
+
+});// end of ddogger post
 
 module.exports = router;
