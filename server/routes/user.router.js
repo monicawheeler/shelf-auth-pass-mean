@@ -1,6 +1,6 @@
 const express = require('express');
 const encryptLib = require('../modules/encryption');
-const Person = require('../models/Person');
+const Model = require('../models/Person');
 const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
@@ -24,7 +24,7 @@ router.post('/register', (req, res, next) => {
   const username = req.body.username;
   const password = encryptLib.encryptPassword(req.body.password);
 
-  const newPerson = new Person({ username, password });
+  const newPerson = new Model.Person({ username, password });
   newPerson.save()
     .then(() => { res.sendStatus(201); })
     .catch((err) => { next(err); });
@@ -43,6 +43,33 @@ router.get('/logout', (req, res) => {
   // Use passport's built-in method to log out the user
   req.logout();
   res.sendStatus(200);
+});
+
+// Add a new ddogger
+router.post('/ddogger/:id', (req, res) => {
+  console.log('in ddoggers route', req.body);
+  console.log('params', req.params);
+
+  let newDdog = new Model.Item(req.body);
+
+  Model.Person.findByIdAndUpdate(
+      {
+          "_id": req.params.id
+      },
+      // push this new object into the array on this Game Document
+      { $push: { shelfItem: newDdog } },
+      (pusherror, doc) => {
+          if (pusherror) {
+              console.log('error on push to shelf array: ', pusherror);
+              res.sendStatus(500);
+          } else {
+              console.log('updated person Document: ', doc);
+              console.log('-----------------------------');
+
+              res.sendStatus(201);
+          }
+      }
+  );
 });
 
 module.exports = router;

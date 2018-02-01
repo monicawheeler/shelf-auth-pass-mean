@@ -13,4 +13,7 @@ const PersonSchema = new Schema({
   shelfItem: [itemSchema]
 });
 
-module.exports = mongoose.model('Person', PersonSchema);
+let Person = mongoose.model('Person', PersonSchema);
+let Item = mongoose.model('Item', itemSchema);
+
+module.exports = {Person, Item};
