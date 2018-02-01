@@ -72,3 +72,9 @@ li a:hover {
     text-decoration: underline;
     color: #eee;
 }
+
+.image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
