@@ -1,6 +1,6 @@
 
 <ul class="image-list">
-    <li ng-repeat="image in vm.user.shelfItem">
+    <li ng-repeat="image in vm.shelfList.list">
         <img class="image" ng-src="{{image.imgUrl}}" alt="{{image.description}}">
         <p>{{image.description}}</p>
     </li>

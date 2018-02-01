@@ -3,6 +3,7 @@ myApp.controller('ShelfController', ['UserService', function(UserService) {
   var self = this;
   self.userService = UserService;
   self.user = UserService.userObject;
+  self.shelfList = UserService.shelfList;
   console.log(self.user);
   
 
@@ -12,6 +13,6 @@ myApp.controller('ShelfController', ['UserService', function(UserService) {
   }
 
 
-  //self.userService.getImages();
+  // self.userService.getImages();
 
 }]);
