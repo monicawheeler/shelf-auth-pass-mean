@@ -14,6 +14,8 @@
 <h2>Manage Your DDogs</h2>
 <ul>
     <li ng-repeat="userImage in vm.userImageList.list">
-        <img ng-src="{{userImage.imgUrl}}" alt="">
+        <img class="image" ng-src="{{userImage.imgUrl}}" alt="">
+        <p>{{userImage.description}}</p>
+        <button class="delete" ng-click="vm.deleteUserImage(userImage._id)">Delete</button>
     </li>
 </ul>

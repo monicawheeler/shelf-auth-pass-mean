@@ -122,4 +122,23 @@ router.post('/ddogger/:id', (req, res) => {
 
 });// end of ddogger post
 
+
+router.delete('/ddogger/:id', (req, res) => {
+  let imageId = req.params.id;
+  Item.findByIdAndRemove(
+      {"_id": imageId},
+      // function(error, removed) 
+      (error, removedDocument) => {
+          if (error) {
+              console.log('error on remove: ', error);
+              res.sendStatus(500);
+          } else {
+              console.log('Document we removed: ', removedDocument);
+              res.sendStatus(200);
+          }
+      }
+  )
+
+});
+
 module.exports = router;
