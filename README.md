@@ -10,7 +10,7 @@
 With Amy, Ian, and Monica
 
 ## Planning
-![wireframe image](https://github.com/monicawheeler/shelf-auth-pass-mean/tree/dev/images/wireframes.png "App wireframes")
+![wireframe image](https://github.com/monicawheeler/shelf-auth-pass-mean/blob/dev/images/wireframes.jpg "App wireframes")
 
 - Trello Board 
 [Trello Planning](https://trello.com/b/HUEeri2j/shelf-auth)
