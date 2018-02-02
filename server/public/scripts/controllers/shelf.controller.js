@@ -14,5 +14,10 @@ myApp.controller('ShelfController', ['UserService', function(UserService) {
     UserService.shelfADdog(userId, newDdog);
   }
 
+  self.deleteUserImage = function (imageId) {
+    console.log('delete button', imageId);
+    UserService.deleteUserImage(imageId);
+  }
+
 
 }]);

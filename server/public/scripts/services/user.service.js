@@ -66,17 +66,35 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
       });
   }
 
-  self.shelfADdog = function (userId, newDdog) {
-    console.log('ddog clickin');
-    $http.post(`/api/user/ddogger/${userId}`, newDdog) 
-    .then(function (response) {
-        console.log('successful post response' , response);
-        self.getImages();
-    })
-    .catch(function (error) {
-        console.log('error on post response' , error);
-    }); 
+self.shelfADdog = function (userId, newDdog) {
+  console.log('ddog clickin');
+  $http.post(`/api/user/ddogger/${userId}`, newDdog) 
+  .then(function (response) {
+      console.log('successful post response' , response);
+      self.getImages();
+  })
+  .catch(function (error) {
+      console.log('error on post response' , error);
+  }); 
 }
+
+self.deleteUserImage = function(imageId) {
+  console.log('delete clicked');
+  console.log('imageId', imageId);
+  
+  
+  $http.delete(`/api/user/ddogger/${imageId}`) 
+  .then(function (response) {
+      console.log('successful post response' , response);
+      self.getImages();
+      self.getUserImages(self.userObject._id)
+  })
+  .catch(function (error) {
+      console.log('error on post response' , error);
+  }); 
+}
+
+
   self.logout = function () {
     $http.get('/api/user/logout')
       .then(function (response) {
