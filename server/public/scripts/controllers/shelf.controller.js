@@ -4,6 +4,8 @@ myApp.controller('ShelfController', ['UserService', function(UserService) {
   self.userService = UserService;
   self.user = UserService.userObject;
   self.shelfList = UserService.shelfList;
+  self.userImageList = UserService.userImageList;
+  
   console.log(self.user);
   
 
@@ -12,7 +14,5 @@ myApp.controller('ShelfController', ['UserService', function(UserService) {
     UserService.shelfADdog(userId, newDdog);
   }
 
-
-  // self.userService.getImages();
 
 }]);

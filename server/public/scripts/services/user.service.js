@@ -5,6 +5,7 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
 
   self.userObject = {};
   self.shelfList = {list:[]};
+  self.userImageList = {list: []};
 
   // ask the server if this user is logged in
   self.getuser = function () {
@@ -16,6 +17,9 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
           self.userObject._id = response.data._id;
           self.userObject.shelfItem = response.data.shelfItem;
           console.log('User Data: ', self.userObject);
+
+          self.getUserImages(self.userObject._id);
+
         } else {
           // unlikely to get here, but if we do, bounce them back to the login page
           $location.path("/shelf");
@@ -27,12 +31,13 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
         $location.path("/shelf");
       });
   }
+  
 
   self.getImages = function () {
     $http.get('/api/user/images')
       .then(function (response) {
           self.shelfList.list = response.data;
-          console.log('User Shelf Item: ', self.shelfList.list);
+          console.log('Whole Shelf: ', self.shelfList.list);
       },
       // error response of unauthorized (403)
       function(response) {
@@ -43,6 +48,23 @@ myApp.service('UserService', ['$http', '$location', function ($http, $location) 
 
 
   self.getImages();
+
+  self.getUserImages = function(userId) {
+    console.log('userId', userId);
+    
+    $http.get('/api/user/images/' + userId)
+      .then(function (response) {
+          self.userImageList.list = response.data.shelfItem;
+
+          // self.userImageList.list = response.data;
+          console.log('User Shelf Item: ', self.userImageList.list);
+      },
+      // error response of unauthorized (403)
+      function(response) {
+        console.log('error:', response);
+        
+      });
+  }
 
   self.shelfADdog = function (userId, newDdog) {
     console.log('ddog clickin');

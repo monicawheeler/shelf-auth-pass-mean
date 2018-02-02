@@ -31,8 +31,25 @@ router.get('/images', (req, res) => {
           console.log('found shelf documents', shelfList);
           res.send(shelfList);
       }
-  })
+  });
 });
+
+// Get user specific images
+router.get('/images/:id', (req, res) => {
+  console.log('images get');
+  let personId = req.params.id;
+  
+  Person.findById({_id: personId}).populate('shelfItem').exec( (error, shelfList) => {
+      if(error) {
+          console.log('error on find:', error);
+          res.sendStatus(500);
+      } else {
+          console.log('found shelf documents', shelfList);
+          res.send(shelfList);
+      }
+    }); // end find
+}); // end route
+
 
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen

@@ -10,3 +10,10 @@
     <label>Add a Ddoggin' Description</label><input type="text" ng-model="vm.newDdog.description">
     <button ng-click="vm.shelfADdog(vm.user._id, vm.newDdog)">Shelf A Ddog</button>
 </div>
+
+<h2>Manage Your DDogs</h2>
+<ul>
+    <li ng-repeat="userImage in vm.userImageList.list">
+        <img ng-src="{{userImage.imgUrl}}" alt="">
+    </li>
+</ul>
