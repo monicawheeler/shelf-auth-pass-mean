@@ -72,6 +72,7 @@ self.shelfADdog = function (userId, newDdog) {
   .then(function (response) {
       console.log('successful post response' , response);
       self.getImages();
+      self.getUserImages(userId);
   })
   .catch(function (error) {
       console.log('error on post response' , error);
